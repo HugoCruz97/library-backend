@@ -27,7 +27,7 @@ class BooksController < ApplicationController
   def get_books
     params.permit!
 
-    books = Books.all
+    books = Books.select("*").where("quantity > 0")
     books = books.where(code: params[:code]) if params[:code].present?
 
     render json: { books: books }
